@@ -1,0 +1,11 @@
+body {
+    padding-top: 5rem;
+}
+
+body .container {
+    padding-top: 50px;
+}
+
+.hidden {
+    display: none;
+}

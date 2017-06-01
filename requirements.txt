@@ -1,0 +1,8 @@
+Django
+django-redis
+django-cacheops
+django-debug-toolbar
+django-pipeline
+django-celery-email
+psycopg2
+

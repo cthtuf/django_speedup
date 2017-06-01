@@ -1,0 +1,18 @@
+This project is demo of some technicks for speedup of Django application.
+
+1. Caching sessions (+)
+2. Caching template loaders (+)
+3. Caching views (+)
+4. Caching querysets (+)
+5. add ETAG, Last-Modified (-)
+6. Css, JS minifiers, concatenate (+, needs set up webserver)
+7. DNS prefetch (+)
+8. subdomain for static (+, needs set up webserver)
+9. djcelery for delayed tasks (-, email)
+10. using cdn (+)
+11. select related (+)
+12. using fulltext search (-)
+13. using update_field (+)
+14. mass create (-)
+15. mass update (-)
+16. template using {% block %} instead {% include %} (+)

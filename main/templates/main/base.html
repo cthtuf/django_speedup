@@ -1,0 +1,74 @@
+{% load pipeline %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="dns-prefetch" href="//code.jquery.com/">
+    <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com/">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com/">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+    {% if DEBUG %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% else %}
+    {% stylesheet 'styles' %} {# django-pipeline styles, check settings #}
+    {% endif %}
+    {% block head_scripts %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button"
+            data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Django Speedup Project</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'articles-list' %}">Articles</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text"
+                   placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                Search
+            </button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}
+
+    {% endblock %}
+</div><!-- /.container -->
+{% if messages %}
+<div class="messages hidden">
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="message-jgrowl {{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+{% if DEBUG %}
+<script src="{% static 'js/base.js' %}"></script>
+{% else %}
+    {% javascript 'scripts' %} {# django-pipeline scripts, check settings #}
+{% endif %}
+{% block footer_scripts %}{% endblock %}
+</body>
+</html>

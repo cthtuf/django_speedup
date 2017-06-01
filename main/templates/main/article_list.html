@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% load main_extras %}
+{% block title %}Articles List{% endblock %}
+{% block content %}
+    <p>
+        <a href="{% url 'article-create' %}" class="btn btn-secondary btn-sm">Create Article</a>
+    </p>
+    {% regroup object_list by is_published as articles_list %}
+    <h4>Published:</h4>
+    <ul>
+        {% for object in articles_list|published_articles:True %}
+            <li><a href="{% url 'article-update' object.id %}">{{ object.description }}</a></li>
+        {% empty %}
+            <li>No articles. Try to write one!</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h4>Pending to publish:</h4>
+    <ul>
+        {% for object in articles_list|published_articles:False %}
+            <li>
+                <a href="{% url 'article-update' object.id %}">{{ object.description }}</a>&nbsp;
+                <a href="{% url 'article-publish' object.id %}" class="btn btn-secondary btn-sm btn-publish" role="button">Publish</a>
+            </li>
+        {% empty %}
+            <li>Nothing to publish. Try to write new article!</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

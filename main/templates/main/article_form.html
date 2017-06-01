@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+{% block content %}
+{% comment %} Author: <a href="{% url 'author-detail' object.author.id %}">{{ object.author.name }}</a> {% endcomment %}
+<form action="{% url 'article-update' object_id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <button type="submit">Submit</button>
+</form>
+<p>&nbsp;</p>
+{% endblock %}
